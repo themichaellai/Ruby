@@ -20,13 +20,11 @@ class Tree
   def initialize(tree)
     @children = []
     @node_name = tree.keys.first
-    get_children(tree[@node_name])
-  end
-
-  def get_children(hash)
-    hash.keys.each do |key|
-      # better way to do this?
-      @children.push Tree.new({key => hash[key]})
+    if not tree[@node_name].nil?
+      @children = tree[@node_name].keys.map{ |key| 
+        #puts "#{key} => #{tree[@node_name][key]}"
+        Tree.new({key => tree[@node_name][key]})
+      }
     end
   end
 
